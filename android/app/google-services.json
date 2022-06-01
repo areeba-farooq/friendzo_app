@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "917592075327",
+    "project_id": "friendzo-app",
+    "storage_bucket": "friendzo-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:917592075327:android:c0a84794d7e3450e225c8a",
+        "android_client_info": {
+          "package_name": "com.example.friendzo_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "917592075327-pr3chkn2akdb1o3g1eisb97uk0bvtvek.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTNPtAqrZgxc0jxM6Psmzm9E496aEMf-8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "917592075327-pr3chkn2akdb1o3g1eisb97uk0bvtvek.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "917592075327-oh73iott4qjjqmg6sgtbv7qoqre04t4e.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.friendzoApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

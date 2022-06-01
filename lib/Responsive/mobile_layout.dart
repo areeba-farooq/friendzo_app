@@ -1,6 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:friendzo_app/Models/user_model.dart';
+import 'package:friendzo_app/Providers/user_provider.dart';
+import 'package:provider/provider.dart';
 
 class MobileLayout extends StatefulWidget {
   const MobileLayout({Key? key}) : super(key: key);
@@ -12,8 +13,9 @@ class MobileLayout extends StatefulWidget {
 class _MobileLayoutState extends State<MobileLayout> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(child: Text("username")),
+    UserModel userMod = Provider.of<UserProvider>(context).getUser;
+    return Scaffold(
+      body: Center(child: Text(userMod.username)),
     );
   }
 }

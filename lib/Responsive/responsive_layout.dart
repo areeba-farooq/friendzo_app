@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:friendzo_app/Providers/user_provider.dart';
 import 'package:provider/provider.dart';
 
-import '../Utils/dimensions.dart';
+import '../Utils/global_variables.dart';
 
 class ResponsiveLayout extends StatefulWidget {
   final Widget webScreenLayout;

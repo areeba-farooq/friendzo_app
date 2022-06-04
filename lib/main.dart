@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData.dark().copyWith(
-          primaryColor: mobileBackgroundColor,
+          scaffoldBackgroundColor: mobileBackgroundColor,
         ),
 
         //There are 3 methods that firebase give us to persist auth state

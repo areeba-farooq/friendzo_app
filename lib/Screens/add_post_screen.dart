@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:friendzo_app/Models/user_model.dart';
 import 'package:friendzo_app/Providers/user_provider.dart';
+import 'package:friendzo_app/Resources/firestore_methods.dart';
 import 'package:friendzo_app/Utils/colors.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
@@ -18,6 +19,8 @@ class AddPostScreen extends StatefulWidget {
 
 class _AddPostScreenState extends State<AddPostScreen> {
   Uint8List? _file;
+  final TextEditingController _descriptionController = TextEditingController();
+  bool _isLoading = false;
 
   _selectImage(BuildContext context) async {
     return showDialog(
@@ -47,10 +50,50 @@ class _AddPostScreenState extends State<AddPostScreen> {
                     _file = file;
                   });
                 },
+              ),
+              SimpleDialogOption(
+                padding: const EdgeInsets.all(20),
+                child: const Text('Cancle'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
               )
             ],
           );
         });
+  }
+
+  postImage(
+    String uid,
+    String username,
+    String profileImg,
+  ) async {
+    setState(() {
+      _isLoading = true;
+    });
+    try {
+      String res = await FirestoreMethods().uploadPost(
+          _descriptionController.text, uid, _file!, username, profileImg);
+      if (res == 'success') {
+        setState(() {
+          _isLoading = false;
+        });
+        showsnackbar('Posted!', context);
+      } else {
+        setState(() {
+          _isLoading = true;
+        });
+        showsnackbar(res, context);
+      }
+    } catch (e) {
+      showsnackbar(e.toString(), context);
+    }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _descriptionController.dispose();
   }
 
   @override
@@ -74,7 +117,8 @@ class _AddPostScreenState extends State<AddPostScreen> {
               ),
               actions: [
                 TextButton(
-                    onPressed: () {},
+                    onPressed: () => postImage(
+                        userMod.uid, userMod.username, userMod.photoUrl),
                     child: const Text(
                       'Post',
                       style:
@@ -84,6 +128,10 @@ class _AddPostScreenState extends State<AddPostScreen> {
             ),
             body: Column(
               children: [
+                _isLoading ? const LinearProgressIndicator() : Container(),
+                const SizedBox(
+                  height: 20,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -96,8 +144,9 @@ class _AddPostScreenState extends State<AddPostScreen> {
                     ),
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.45,
-                      child: const TextField(
-                        decoration: InputDecoration(
+                      child: TextField(
+                        controller: _descriptionController,
+                        decoration: const InputDecoration(
                           hintText: 'Write a caption...',
                           border: InputBorder.none,
                         ),
@@ -110,11 +159,9 @@ class _AddPostScreenState extends State<AddPostScreen> {
                       child: AspectRatio(
                         aspectRatio: 487 / 451,
                         child: Container(
-                          decoration: const BoxDecoration(
+                          decoration: BoxDecoration(
                             image: DecorationImage(
-                                image: NetworkImage(
-                                  'https://media.istockphoto.com/photos/mountain-landscape-picture-id517188688?k=20&m=517188688&s=612x612&w=0&h=i38qBm2P-6V4vZVEaMy_TaTEaoCMkYhvLCysE7yJQ5Q=',
-                                ),
+                                image: MemoryImage(_file!),
                                 fit: BoxFit.fill,
                                 alignment: FractionalOffset.topCenter),
                           ),

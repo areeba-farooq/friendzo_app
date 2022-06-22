@@ -63,6 +63,12 @@ class _AddPostScreenState extends State<AddPostScreen> {
         });
   }
 
+  void clearImg() {
+    setState(() {
+      _file = null;
+    });
+  }
+
   postImage(
     String uid,
     String username,
@@ -79,6 +85,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
           _isLoading = false;
         });
         showsnackbar('Posted!', context);
+        clearImg(); //when click on post we need ot clear the previous image in this screen
       } else {
         setState(() {
           _isLoading = true;
@@ -113,7 +120,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
               centerTitle: false,
               leading: IconButton(
                 icon: const Icon(Icons.arrow_back),
-                onPressed: () {},
+                onPressed: clearImg,
               ),
               actions: [
                 TextButton(

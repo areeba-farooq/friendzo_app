@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">917592075327-pr3chkn2akdb1o3g1eisb97uk0bvtvek.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">917592075327</string>
+    <string name="google_api_key" translatable="false">AIzaSyBTNPtAqrZgxc0jxM6Psmzm9E496aEMf-8</string>
+    <string name="google_app_id" translatable="false">1:917592075327:android:c0a84794d7e3450e225c8a</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBTNPtAqrZgxc0jxM6Psmzm9E496aEMf-8</string>
+    <string name="google_storage_bucket" translatable="false">friendzo-app.appspot.com</string>
+    <string name="project_id" translatable="false">friendzo-app</string>
+</resources>
